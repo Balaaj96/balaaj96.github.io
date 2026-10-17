@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical Training Project Portfolio</title>
+  <meta name="description" content="Selected projects in web development, algorithm design, and data visualization by Balaaj Ahmad Bhatti.">
+  <style>
+/* =========================================================
+   Technical Training Project Portfolio — style.css
+   Colors are defined once below. Change them here to
+   re-theme the whole site.
+   ========================================================= */
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f5f7fa;
+  --text: #1a2233;          /* dark navy text */
+  --text-muted: #4a5568;    /* secondary text (passes contrast on white) */
+  --accent: #1d4ed8;        /* single accent: blue */
+  --accent-dark: #1e3a8a;
+  --border: #d9dee7;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(26, 34, 51, 0.08);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--accent); }
+
+/* Visible keyboard focus everywhere */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.container.narrow { max-width: 760px; }
+
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.6rem 1rem; z-index: 200;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- Header / navigation ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--border);
+}
+.nav-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 60px; position: relative;
+}
+.brand { font-weight: 700; color: var(--text); text-decoration: none; }
+
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.25rem; }
+.site-nav a {
+  display: block; padding: 0.5rem 0.75rem; border-radius: 6px;
+  color: var(--text); text-decoration: none; font-weight: 500;
+}
+.site-nav a:hover { background: var(--bg-alt); color: var(--accent); }
+
+.nav-toggle {
+  display: none; background: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.55rem 0.6rem; cursor: pointer;
+}
+.nav-toggle-bar { display: block; width: 22px; height: 2px; background: var(--text); margin: 4px 0; }
+
+/* Mobile navigation: collapsible menu */
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .site-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: #fff; border-bottom: 1px solid var(--border); padding: 0.5rem 1.25rem 1rem;
+  }
+  .site-nav.open { display: block; }
+  .site-nav ul { flex-direction: column; }
+}
+
+/* ---------- Sections ---------- */
+.section { padding: 4rem 0; }
+.section-alt { background: var(--bg-alt); }
+h1, h2, h3, h4 { line-height: 1.25; margin: 0 0 0.75rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 1.1rem 0 0.4rem; }
+.section-lead { color: var(--text-muted); max-width: 720px; margin-bottom: 2rem; }
+
+/* ---------- Hero ---------- */
+.hero { padding: 4.5rem 0 4rem; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+.eyebrow { color: var(--accent-dark); font-weight: 600; margin: 0 0 0.5rem; font-size: 0.9rem; }
+.hero h1 { font-size: clamp(1.9rem, 5vw, 3rem); margin-bottom: 0.5rem; }
+.subtitle { font-size: 1.15rem; color: var(--text-muted); margin: 0 0 1rem; max-width: 720px; }
+.hero-intro { max-width: 640px; margin: 0 0 1.75rem; }
+
+/* ---------- Buttons ---------- */
+.button-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 150px; padding: 0.55rem 1.1rem;
+  border-radius: 8px; font-weight: 600; text-decoration: none;
+  border: 2px solid var(--accent);
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-secondary { background: #fff; color: var(--accent); }
+.btn-secondary:hover { background: #eef2ff; }
+
+/* ---------- Project grid ---------- */
+.project-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 768px)  { .project-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .project-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.project-card {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
+  min-width: 0; /* prevents overflow in grid on small screens */
+}
+.card-media { padding: 1rem 1rem 0; }
+
+/* Screenshot frame: same height for all, whole image always visible (contain) */
+.shot-button {
+  display: block; width: 100%; padding: 0; cursor: zoom-in;
+  background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.shot-button img {
+  width: 100%; height: 280px; object-fit: contain; /* never stretched or cropped */
+}
+.caption { font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0 0; }
+
+.card-body { padding: 1rem 1.25rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.project-number { margin: 0; color: var(--accent-dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.category { margin: 0 0 0.75rem; color: var(--text-muted); font-weight: 500; }
+.card-body p { margin: 0 0 0.5rem; }
+.card-body .button-row { margin-top: auto; padding-top: 1rem; }
+
+.tags { list-style: none; margin: 0 0 0.25rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tags li { background: #eef2ff; color: var(--accent-dark); border-radius: 999px; padding: 0.15rem 0.65rem; font-size: 0.85rem; }
+
+.highlight { background: #eef2ff; border-left: 4px solid var(--accent); padding: 0.6rem 0.8rem; border-radius: 6px; }
+.status-note { font-size: 0.85rem; color: var(--text-muted); margin: 0.6rem 0 0; }
+
+/* ---------- Skills ---------- */
+.skills-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .skills-grid { grid-template-columns: repeat(4, 1fr); } }
+.skill-group { border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; background: #fff; }
+.skill-group ul { margin: 0; padding-left: 1.1rem; }
+.skill-group li { margin-bottom: 0.3rem; }
+.concept { font-size: 0.75rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 0.45rem; margin-left: 0.25rem; white-space: nowrap; }
+
+/* ---------- Contact ---------- */
+.link-list { padding-left: 1.2rem; }
+.link-list li { margin-bottom: 0.4rem; }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top: 1px solid var(--border); padding: 1.5rem 0; text-align: center; color: var(--text-muted); background: var(--bg-alt); }
+.site-footer p { margin: 0; }
+
+/* ---------- Lightbox ---------- */
+.lightbox[hidden] { display: none; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 300; background: rgba(15, 23, 42, 0.88);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.lightbox-inner { position: relative; max-width: 960px; width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.lightbox-inner img { max-width: 100%; max-height: 80vh; object-fit: contain; background: #fff; border-radius: 8px; }
+.lightbox-caption { color: #fff; text-align: center; margin: 0; font-size: 0.95rem; }
+.lightbox-close {
+  align-self: flex-end; background: #fff; color: var(--text); border: none; border-radius: 8px;
+  padding: 0.55rem 1rem; font-weight: 700; cursor: pointer; min-height: 44px;
+}
+
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===================== A. NAVIGATION ===================== -->
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="#home">Balaaj Ahmad Bhatti</a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button"
+              aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Technical Skills</a></li>
+          <li><a href="#contact">Contact / Links</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== B. HERO ===================== -->
+    <section id="home" class="hero">
+      <div class="container">
+        <p class="eyebrow">Computer and Data Science Application Portfolio</p>
+        <h1>Technical Training Project Portfolio</h1>
+        <p class="subtitle">Selected Projects in Web Development, Algorithm Design, and Data Visualization</p>
+        <p class="hero-intro">
+          Three software projects built while learning programming, web development,
+          algorithms, databases, and frontend–backend communication.
+        </p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="#projects">Explore Projects</a>
+          <!-- GITHUB PROFILE URL: change it here if needed -->
+          <a class="btn btn-secondary" href="https://github.com/Balaaj96"
+             target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== C. ABOUT ===================== -->
+    <section id="about" class="section">
+      <div class="container narrow">
+        <h2>About</h2>
+        <p class="about-name"><strong>Balaaj Ahmad Bhatti</strong></p>
+        <!-- EDIT THIS INTRODUCTION FREELY -->
+        <p>
+          I am interested in programming, algorithmic problem-solving, web development,
+          and understanding how software systems work. These projects represent my practical
+          learning through building web applications, exploring database and authentication
+          concepts, and visualizing algorithms.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== D. PROJECTS ===================== -->
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <h2>Projects</h2>
+        <p class="section-lead">
+          Click any screenshot to enlarge it. Each project states what I contributed and
+          where AI tools assisted.
+        </p>
+
+        <div class="project-grid">
+
+          <!-- ---------- PROJECT 1: STUDENT PORTAL ---------- -->
+          <article class="project-card" aria-labelledby="p1-title">
+            <div class="card-media">
+              <button class="shot-button" type="button"
+                      data-alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and English."
+                      data-caption="Academic Nexus Academic Records page showing subject marks, average score, and pass/fail results.">
+                <img src="data:image/png;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAFYwEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQ2OjAwAAACoAMgAAAAAggY4Rr2A2Xh4xj9HzzlVd4q7Ys1yZr9a0c7Se1ZQpWJd7iYV2kXrA9p5iJ1hvUUtWI0T9uvnBSPY0YbF4hTXcQm0ZJ6mab+U3m5lq+oEYeDLyZJ707x/9k=" alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and English." loading="lazy">
+              </button>
+              <p class="caption">Academic Nexus Academic Records page showing subject marks, average score, and pass/fail results.</p>
+            </div>
+            <div class="card-body">
+              <p class="project-number">Project 1</p>
+              <h3 id="p1-title">Academic Nexus</h3>
+              <p class="category">Full-Stack Web Application</p>
+
+              <p>
+                A simple student portal where users register with a name, age, and password,
+                log in, and enter marks for three subjects. A personalized dashboard shows a
+                chart of total marks. Users can view academic records with pass/fail results
+                per record, update marks by selecting a subject, log out, and delete their account.
+              </p>
+
+              <h4>Technologies</h4>
+              <ul class="tags">
+                <li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
+                <li>Supabase</li><li>Replit</li><li>GitHub</li>
+              </ul>
+
+              <h4>My contribution</h4>
+              <p>
+                I built this mainly to learn how authentication and session-based web
+                applications work: sessions, session cookies, JWT concepts, and Row Level
+                Security (RLS) policies in a database. The interface was designed with
+                Google Stitch, and Claude AI assisted with development and code generation.
+                My focus was understanding the architecture, authentication, session
+                management, and database permissions. I did not write all of the code independently.
+              </p>
+
+              <div class="button-row">
+                <a class="btn btn-primary" href="https://student-portal-system--bhattipart96.replit.app/"
+                   target="_blank" rel="noopener noreferrer">Live Demo</a>
+                <a class="btn btn-secondary" href="https://github.com/Balaaj96/Academic--Nexus-Student-portal"
+                   target="_blank" rel="noopener noreferrer">View Source Code</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---------- PROJECT 2: WATER AREA CALCULATOR ---------- -->
+          <article class="project-card" aria-labelledby="p2-title">
+            <div class="card-media">
+              <button class="shot-button" type="button"
+                      data-alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container highlighted."
+                      data-caption="Visual representation of the Container With Most Water problem.">
+                <img src="data:image/png;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAE0gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQzOjA4AAACoAMgAAAAA8gVj0n0w36KYXKjruCP4RVIjS2Y8m4z9M2RT+o7lqP6SYRF5hKPe36M0NylG5yKz/Z+Qxk4c7bKxG1fmPDzhd7wA5Oq4Y+P1Zpk4WZc84m7vQYtmmC3J6YlY7Y9YnuqYbPmu8+rw3agj6CTv4QcvA+5ZpH8F4Um0O0PqX303u5PkqvN7vXW1vUGpZb0XQb4+61wO7ovQdGzULi4m9gRmzvDIZiC8QwZ5bKelCh0E5mE4k7gO0q6I19nG7lQmGZs1kzK1qfMxrKJvpkVf4kQ0aDWb+H9dK4Mb9N3KVCv1x1R0udHle0Ae9v9J66wUkg5n1CR1ERl+5aP1s0yKqI8kP5rJ7jC9t5HxF1SgDk0Sx1KPq8JcP6r/g76l3vGd9mP6M0DClM3LQJg+diGfkg93bKx1Z2Iu2HLlNUs7sZWVbtU0Gmcfr3vlyvx+g==" alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container highlighted." loading="lazy">
+              </button>
+              <p class="caption">Visual representation of the Container With Most Water problem.</p>
+            </div>
+            <div class="card-body">
+              <p class="project-number">Project 2</p>
+              <h3 id="p2-title">Water Area Calculator — Algorithm Visualization</h3>
+              <p class="category">Algorithm Design and Interactive Visualization</p>
+
+              <p>
+                A visual solution to the LeetCode problem "Container With Most Water." The user
+                enters a sequence of height values in a React frontend, which sends them to a
+                Python Flask backend. The backend calculates the maximum area and returns it, and
+                the frontend displays the result as a visual representation of the problem. The
+                goal is to connect the input, the answer, and the picture to make the algorithm
+                easier to understand.
+              </p>
+
+              <h4>Technologies</h4>
+              <ul class="tags">
+                <li>React</li><li>JavaScript</li><li>Python</li><li>Flask</li>
+                <li>GitHub</li><li>Replit (development and testing)</li>
+              </ul>
+
+              <h4>My contribution</h4>
+              <p class="highlight">
+                <strong>I implemented the problem-solving algorithm myself.</strong>
+                Claude AI assisted in creating the React frontend and the Python Flask integration.
+                I did not independently develop every component of the application.
+              </p>
+
+              <div class="button-row">
+                <a class="btn btn-primary" href="https://github.com/Balaaj96/Find-waterArea"
+                   target="_blank" rel="noopener noreferrer">View Source Code</a>
+              </div>
+              <p class="status-note">Source code available · Live demo not currently published.</p>
+            </div>
+          </article>
+
+          <!-- ---------- PROJECT 3: STATIC AFFILIATE WEBSITE ---------- -->
+          <article class="project-card" aria-labelledby="p3-title">
+            <div class="card-media">
+              <button class="shot-button" type="button"
+                      data-alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards."
+                      data-caption="Product catalog displaying affiliate products and links to external product pages.">
+                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAE2gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE1OjIwOjAxAAACoAMgAAAAAigVv3I4n1H0yL3lXMVg0u0G7zJTeAqW1wkkxW3bQFQY1INg8cp3e+PbEwM/w4gblGEqM7W8o7JmV4wPzj4Lqq3SxH0zK39Pv/9k=" alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards, each with an image, price, and button." loading="lazy">
+              </button>
+              <p class="caption">Product catalog displaying affiliate products and links to external product pages.</p>
+            </div>
+            <div class="card-body">
+              <p class="project-number">Project 3</p>
+              <h3 id="p3-title">Balaaj Affiliate Electronics</h3>
+              <p class="category">Static Website Development</p>
+
+              <p>
+                A static product-display website with an e-commerce-style layout. It shows
+                affiliate products with names, prices, sale details, and product links. Each
+                product card has a button that leads to the matching AliExpress product page
+                through an affiliate link. It is published with GitHub Pages and can be found
+                through my Facebook page. It has no checkout, payments, or order management.
+              </p>
+
+              <h4>Technologies</h4>
+              <ul class="tags">
+                <li>HTML</li><li>CSS</li><li>JavaScript (where used)</li>
+                <li>GitHub Pages</li><li>AliExpress affiliate links</li>
+              </ul>
+
+              <h4>My contribution</h4>
+              <p>
+                I created the site through iterative prompting and AI-assisted development with
+                ChatGPT. I worked on organizing the product catalog, presenting product
+                information, and linking product cards to their external pages.
+              </p>
+
+              <div class="button-row">
+                <a class="btn btn-primary" href="https://balaajaffiliateelectronics.github.io/"
+                   target="_blank" rel="noopener noreferrer">Visit Website</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== E. TECHNICAL SKILLS ===================== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2>Technical Skills</h2>
+        <p class="section-lead">
+          Technologies I have used while learning. Items marked "concept" were studied or
+          explored, not mastered.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Languages and Frontend</h3>
+            <ul><li>Python</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Frameworks and Backend</h3>
+            <ul><li>Flask</li><li>React</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Database and Security Concepts</h3>
+            <ul>
+              <li>Supabase</li>
+              <li>Authentication <span class="concept">concept</span></li>
+              <li>Session management <span class="concept">concept</span></li>
+              <li>Session cookies <span class="concept">concept</span></li>
+              <li>Row Level Security <span class="concept">concept</span></li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Tools and Deployment</h3>
+            <ul>
+              <li>GitHub</li><li>GitHub Pages</li><li>Replit</li>
+              <li>Google Stitch</li><li>Claude AI</li><li>ChatGPT</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== F. DEVELOPMENT PROCESS ===================== -->
+    <section id="process" class="section section-alt">
+      <div class="container narrow">
+        <h2>Development Process</h2>
+        <p>
+          These projects were built through practical experimentation and AI-assisted
+          development. AI tools supported parts of the interface design, code generation,
+          and integration. I focused on learning the underlying concepts and, for the Water
+          Area Calculator, on implementing the algorithm myself.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== G. CONTACT AND LINKS ===================== -->
+    <section id="contact" class="section">
+      <div class="container narrow">
+        <h2>Contact / Links</h2>
+        <ul class="link-list">
+          <li>
+            <a href="https://github.com/Balaaj96" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+          </li>
+          <li>
+            <a id="pdf-link" href="PDF_URL_PLACEHOLDER" target="_blank" rel="noopener noreferrer">Portfolio PDF</a>
+          </li>
+        </ul>
+        <p class="status-note" id="pdf-note" hidden>The portfolio PDF has not been uploaded yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== H. FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Technical Training Project Portfolio · <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <!-- ===================== SCREENSHOT LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged screenshot" hidden>
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close enlarged screenshot">Close ✕</button>
+      <img id="lightbox-img" src="" alt="">
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <script>
+// =========================================================
+// Technical Training Project Portfolio — script.js
+// Four small features: mobile menu, footer year, PDF link
+// check, and the screenshot lightbox.
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ---------- 1. Footer year (automatic) ----------
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ---------- 2. Mobile navigation toggle ----------
+  var navToggle = document.getElementById("nav-toggle");
+  var siteNav = document.getElementById("site-nav");
+
+  function setNav(open) {
+    siteNav.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  navToggle.addEventListener("click", function () {
+    setNav(!siteNav.classList.contains("open"));
+  });
+
+  // Close the menu after choosing a link
+  siteNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () { setNav(false); });
+  });
+
+  // ---------- 3. PDF link ----------
+  var pdfLink = document.getElementById("pdf-link");
+  var pdfNote = document.getElementById("pdf-note");
+  if (pdfLink && pdfLink.getAttribute("href") === "PDF_URL_PLACEHOLDER") {
+    pdfLink.parentElement.hidden = true;
+    if (pdfNote) { pdfNote.hidden = false; }
+  }
+
+  // ---------- 4. Screenshot lightbox ----------
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightbox-img");
+  var lightboxCaption = document.getElementById("lightbox-caption");
+  var closeButton = document.getElementById("lightbox-close");
+  var lastFocused = null;
+
+  function openLightbox(button) {
+    lastFocused = button;
+    lightboxImg.src = button.querySelector("img").src;
+    lightboxImg.alt = button.getAttribute("data-alt");
+    lightboxCaption.textContent = button.getAttribute("data-caption");
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeButton.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+    if (lastFocused) { lastFocused.focus(); }
+  }
+
+  document.querySelectorAll(".shot-button").forEach(function (button) {
+    button.setAttribute("aria-label", "Enlarge screenshot: " + button.getAttribute("data-caption"));
+    button.addEventListener("click", function () { openLightbox(button); });
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  // Click on the dark backdrop closes it too
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) { closeLightbox(); }
+  });
+
+  // Escape closes; Tab stays inside the dialog (only one focusable element)
+  document.addEventListener("keydown", function (event) {
+    if (lightbox.hidden) { return; }
+    if (event.key === "Escape") { closeLightbox(); }
+    if (event.key === "Tab") { event.preventDefault(); closeButton.focus(); }
+  });
+});
+
+  </script>
+</body>
+</html>
