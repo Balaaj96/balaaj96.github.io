@@ -143,9 +143,15 @@ h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color
 .shot-button {
   display: block; width: 100%; padding: 0; cursor: zoom-in;
   background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  /* create a stable frame so the image has a predictable viewport */
+  display: flex; align-items: center; justify-content: center;
+  min-height: 280px;
 }
 .shot-button img {
-  width: 100%; height: 280px; object-fit: contain; /* never stretched or cropped */
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain; /* never stretched or cropped */
 }
 .caption { font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0 0; }
 
@@ -273,10 +279,10 @@ h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color
           <article class="project-card" aria-labelledby="p1-title">
             <div class="card-media">
               <button class="shot-button" type="button"
-                      data-alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and E[...]"
+                      data-alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and E[...]
                       data-caption="Academic Nexus Academic Records page showing subject marks, average score, and pass/fail results.">
-                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAFYwEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQ2OjAwAAACoAM[...]"
-                     alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and English[...]"
+                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAFYwEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQ2OjAwAAACoA[...]
+                     alt="Academic Nexus Academic Records page with a sidebar, subject marks bar chart, overall average score ring, and a table of pass/fail results for Physics, Math, and English[...]
                      loading="lazy">
               </button>
               <p class="caption">Academic Nexus Academic Records page showing subject marks, average score, and pass/fail results.</p>
@@ -324,10 +330,10 @@ h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color
           <article class="project-card" aria-labelledby="p2-title">
             <div class="card-media">
               <button class="shot-button" type="button"
-                      data-alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container hig[...]"
+                      data-alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container hig[...]
                       data-caption="Visual representation of the Container With Most Water problem.">
-                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAE0gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQzOjA4AAACoAM[...]"
-                     alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container highlight[...]"
+                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAE0gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE0OjQzOjA4AAACoA[...]
+                     alt="Water Area Calculator showing the input array 7,3,1,8,5,2,0,8, a maximum area of 49, width 7, wall heights 7 and 8, and a bar chart with the selected container highlight[...]
                      loading="lazy">
               </button>
               <p class="caption">Visual representation of the Container With Most Water problem.</p>
@@ -371,10 +377,10 @@ h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color
           <article class="project-card" aria-labelledby="p3-title">
             <div class="card-media">
               <button class="shot-button" type="button"
-                      data-alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards[...]"
+                      data-alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards[...]
                       data-caption="Product catalog displaying affiliate products and links to external product pages.">
-                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAE2gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE1OjIwOjAxAAACoA[...]"
-                     alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards, each[...]"
+                <img src="data:image/jpeg;base64,/9j/4QCERXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAC0AEBAAQAAAABAAAE2gEyAAIAAAAUAAAASgESAAMAAAABAAEAAIdpAAQAAAABAAAAXgAAAAAyMDI2OjEwOjE3IDE1OjIwOjAxAAACoA[...]
+                     alt="Balaaj Affiliate Electronics website with a purple banner reading Balaaj Affiliate Electronics, above Top Rated Products and Regular Products rows of product cards, each[...]
                      loading="lazy">
               </button>
               <p class="caption">Product catalog displaying affiliate products and links to external product pages.</p>
